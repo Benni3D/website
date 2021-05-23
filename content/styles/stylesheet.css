@@ -29,6 +29,7 @@ h1 {
 .link-td {
    font-size: 22px;
    color: #408040;
+   border: 1px solid darkgreen;
 }
 .link {
    color: #ffffff;
@@ -45,4 +46,6 @@ h1 {
 .cat {
    width: 33%;
 }
-
+.memevid {
+   width: 49.8%;
+}
