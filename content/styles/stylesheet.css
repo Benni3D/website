@@ -9,30 +9,49 @@ body {
    border: 10px solid #204020;
    background-color: #204020;
 }
+.banner {
+   width: 100%;
+   height: 120px;
+}
+
+.separator {
+   font-size: 1px;
+}
 
 h1 {
-   color: #20a0ff;
+   color: #20b0ff;
    font-style: bold;
    font-size: 40px;
 }
 
 .text {
-   color: #8080ff;
+   color: #8070ff;
    font-family: monospace;
    font-size: 18px;
 }
 
 .link-table {
-   border: 2px solid darkgreen;
-   width: 99.9%;
+   border: 0px solid darkgreen;
+   width: 100%;
+   margin-top: 12px;
 }
 .link-td {
    font-size: 22px;
    color: #408040;
    border: 1px solid darkgreen;
+   background: darkgreen;
 }
-.link {
-   color: #ffffff;
+.link-button {
+   background-color: darkgreen;
+   border: 1px solid green;
+   color: yellow;
+   width: 100%;
+   height: 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 15px;
+   cursor: pointer;
 }
 .link2 {
    color: #478342;
@@ -47,5 +66,24 @@ h1 {
    width: 33%;
 }
 .memevid {
-   width: 49.8%;
+   width: 49%;
+}
+
+.bcc-p {
+   color: #ffffff;
+   margin-top: 0;
+   margin-bottom: 0;
+   vertical-align: top;
+}
+.bcc-pre {
+   color: #8070ff;
+   margin-top: 0;
+   margin-bottom: 0;
+   vertical-align: top;
+}
+.bcc-h2 {
+   color: #ff4444;
+}
+.bcc-a {
+   color: #bbbb00;
 }

@@ -1,0 +1,88 @@
+<!-- Creator     : groff version 1.22.4 -->
+<!-- CreationDate: Sun May 23 23:00:47 2021 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p style="margin-top: 1em">bcc - brainlet C compiler</p>
+
+<p style="margin-top: 1em">The compiler is a small compiler
+for a C-like language. The language currently has a minimal
+type-system. (SEE <i>LANGUAGE</i>)</p>
+
+<p style="margin-top: 1em">Specify the file (or
+&rsquo;-&rsquo; for standard output). By default the file is
+derived from the file, except if the option was specified,
+then it is standard output. Compile and assemble the
+program. (This is the default) Note: For x86_64 and i386 it
+is required that the assembler is installed. Only emit the
+abstract syntax tree of the program, as interpreted by the
+parser. Only emit the intermediate representation. Emit the
+assembly output. Specify the level. (possible values: 0, 1,
+2) Disable all <i>warnings</i>. Print the version
+information. Specify a target-dependend option.</p>
+
+<p style="margin-top: 1em">The output file, to which to
+write the resulting output.</p>
+
+<p style="margin-top: 1em">The source file, for which to
+generate the output.</p>
+
+<p style="margin-top: 1em">The optimization level to
+perform. (default: 0)</p>
+
+<p style="margin-top: 1em">A target-specific option.
+(Currently none)</p>
+
+<p style="margin-top: 1em">The compiler aims to implement a
+usable sub-set of the C99 standard, while changing some
+annoyance and adding a few extensions. Some of the changes
+break compatibility with the standard, this is intentional.
+The compiler does not support the full feature-set of
+neither C99 nor C90. But that was never the goal. This
+compiler was created as a learning project and as a
+successor to benc (an even worse compiler than this only
+available for 32-bit x86). Changes/Extensions: - do-while
+does not require a compound statement (eg. is valid). - the
+pointer &rsquo;*&rsquo; is part of the type, instead of the
+name ( not ). - added new basic type <b>byte</b>, which is
+guaranteed to be exactly 8 bits wide. - parameter names of
+function implementations may be omitted. (eg. ). - added
+operator, similar to the operator. Instead it evaluates to
+the length in elements of the array. - the keyword behaves
+as in C++11. - function pointer types are now consistent
+(eg. instead of ).</p>
+
+<p style="margin-top: 1em">Supported optimization
+techniques: - constant folding (-O1) - micro-optimizations
+(-O1) - multiply to shift (-O1) - fusion of memory
+instructions for x86 (-O2) - dead-code elimination (-O1) -
+constant evaluation of function call targets (-O1)</p>
+
+<p style="margin-top: 1em">Currently supported target
+architectures: - i386 - x86_64</p>
+
+<p style="margin-top: 1em">The compiler uses the System V
+ABI, where applicable. There is no multilib support, the
+compiler is installed for a single target-architecture. If a
+second target is wanted, the compiler must be rebuild and
+reinstalled for the specific architecure.</p>
+<hr>
+</body>
+</html>

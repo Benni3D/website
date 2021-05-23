@@ -1,3 +1,219 @@
-<h1>Brainlet C Compiler</h1>
-<img width="25%" src="img/bcc.png"><br>
-<a class="link2" href="https://github.com/Benni3D/bcc">GitHub</a>
+
+<h1 align="center">Brainlet C Compiler</h1>
+<table width="100%"><tr><td width="80%">
+
+<a class="bcc-a" href="#NAME">NAME</a><br>
+<a class="bcc-a" href="#SYNOPSIS">SYNOPSIS</a><br>
+<a class="bcc-a" href="#DESCRIPTION">DESCRIPTION</a><br>
+<a class="bcc-a" href="#OPTIONS">OPTIONS</a><br>
+<a class="bcc-a" href="#OPERANDS">OPERANDS</a><br>
+<a class="bcc-a" href="#LANGUAGE">LANGUAGE</a><br>
+<a class="bcc-a" href="#OPTIMIZATIONS">OPTIMIZATIONS</a><br>
+<a class="bcc-a" href="#TARGETS">TARGETS</a><br>
+</td><td>
+<img width="100%" src="img/bcc.png"><br>
+<a align="center" class="link2" href="https://github.com/Benni3D/bcc">GitHub</a>
+</td></tr></table>
+
+<hr>
+
+
+<h2 class="bcc-h2">NAME
+<a class="bcc-a" name="NAME"></a>
+</h2>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em">bcc - brainlet
+C compiler</p>
+
+<h2 class="bcc-h2">SYNOPSIS
+<a class="bcc-a" name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p class="bcc-p" style="margin-top: 1em"><b>bcc</b></p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+
+<p class="bcc-p" style="margin-top: 1em">[<b>-c</b>|<b>-i</b>|<b>-A</b>|<b>-S</b>]
+[<b>-w</b>] [<b>-O&nbsp;</b><i>level</i>]
+[<b>-o&nbsp;</b><i>output</i>]
+[<b>-m&nbsp;</b><i>mach_opt</i>] <i>source</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p class="bcc-p" style="margin-top: 1em"><b>bcc</b></p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p class="bcc-p" style="margin-top: 1em">[<b>-V</b>]</p></td></tr>
+</table>
+
+<h2 class="bcc-h2">DESCRIPTION
+<a class="bcc-a" name="DESCRIPTION"></a>
+</h2>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em">The <i>bcc</i>
+compiler is a small compiler for a C-like language. The
+language currently has a minimal type-system. (SEE
+<i>LANGUAGE</i>)</p>
+
+<h2 class="bcc-h2">OPTIONS
+<a class="bcc-a" name="OPTIONS"></a>
+</h2>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em"><b>-o</b>
+<i>output</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">Specify the <i>output</i> file
+(or &rsquo;-&rsquo; for standard output). By default the
+<i>output</i> file is derived from the <i>source</i> file,
+except if the <b>-A</b> option was specified, then it is
+standard output.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-c</b></p>
+
+<p class="bcc-p" style="margin-left:18%;">Compile and assemble the
+program. (This is the default) <br>
+Note: For x86_64 and i386 it is required that the
+<i>nasm</i> assembler is installed.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-A</b></p>
+
+<p class="bcc-p" style="margin-left:18%;">Only emit the abstract syntax
+tree of the program, as interpreted by the parser.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-i</b></p>
+
+<p class="bcc-p" style="margin-left:18%;">Only emit the intermediate
+representation.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-S</b></p>
+
+<p class="bcc-p" style="margin-left:18%;">Emit the assembly output.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-O</b> <i>level</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">Specify the <i>optimization</i>
+level. (possible values: 0, 1, 2)</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-w</b></p>
+
+<p class="bcc-p" style="margin-left:18%;">Disable all
+<i>warnings</i>.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-V</b></p>
+
+<p class="bcc-p" style="margin-left:18%;">Print the version
+information.</p>
+
+<p class="bcc-p" style="margin-left:11%;"><b>-m</b> <i>mach_opt</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">Specify a target-dependend
+option.</p>
+
+<h2 class="bcc-h2">OPERANDS
+<a class="bcc-a" name="OPERANDS"></a>
+</h2>
+
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em"><i>output</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">The output file, to which to
+write the resulting output.</p>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em"><i>source</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">The source file, for which to
+generate the output.</p>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em"><i>level</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">The optimization level to
+perform. (default: 0)</p>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em"><i>mach_opt</i></p>
+
+<p class="bcc-p" style="margin-left:18%;">A target-specific option.
+(Currently none)</p>
+
+<h2 class="bcc-h2">LANGUAGE
+<a class="bcc-a" name="LANGUAGE"></a>
+</h2>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em"><i>WIP</i> <br>
+The compiler aims to implement a usable sub-set of the C99
+standard, while changing some annoyance and adding a few
+extensions. Some of the changes break compatibility with the
+standard, this is intentional. The compiler does not support
+the full feature-set of neither C99 nor C90. But that was
+never the goal. This compiler was created as a learning
+project and as a successor to benc (an even worse compiler
+than this only available for 32-bit x86). <br>
+Changes/Extensions: <br>
+- do-while does not require a compound statement (eg. <b>do
+f(); while (1);</b> is valid). <br>
+- the pointer &rsquo;*&rsquo; is part of the type, instead
+of the name ( <b>int* a;</b> not <b>int *a;</b> ). <br>
+- added new basic type <b>byte</b>, which is guaranteed to
+be exactly 8 bits wide. <br>
+- parameter names of function implementations may be
+omitted. (eg. <b>int add(int, int a) { return a; }</b> ).
+<br>
+- added <b>arraylen</b> operator, similar to the
+<b>sizeof</b> operator. Instead it evaluates to the length
+in elements of the array. <br>
+- the <b>auto</b> keyword behaves as in C++11. <br>
+- function pointer types are now consistent (eg. <b>int(int,
+int)*</b> instead of <b>int(*)(int, int)</b> ).</p>
+
+<h2 class="bcc-h2">OPTIMIZATIONS
+<a class="bcc-a" name="OPTIMIZATIONS"></a>
+</h2>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em">Supported
+optimization techniques: <br>
+- constant folding (-O1) <br>
+- micro-optimizations (-O1) <br>
+- multiply to shift (-O1) <br>
+- fusion of memory instructions for x86 (-O2) <br>
+- dead-code elimination (-O1) <br>
+- constant evaluation of function call targets (-O1)</p>
+
+<h2 class="bcc-h2">TARGETS
+<a class="bcc-a" name="TARGETS"></a>
+</h2>
+
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em">Currently
+supported target architectures: <br>
+- i386 <br>
+- x86_64</p>
+
+<p class="bcc-p" style="margin-left:11%; margin-top: 1em">The compiler
+uses the System V ABI, where applicable. <br>
+There is no multilib support, the compiler is installed for
+a single target-architecture. If a second target is wanted,
+the compiler must be rebuild and reinstalled for the
+specific architecure.</p>
+<hr>
