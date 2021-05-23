@@ -19,6 +19,7 @@ if [ ! -f "${dest}/bcc.1.html" ]; then
       -e 's/<p/<p class="bcc-p"/g' \
       -e 's/<pre/<pre class="bcc-pre"/g' \
       -e 's/<h2/<h2 class="bcc-h2"/g' \
+      -e 's/<hr>/<hr class="bcc-hr">/g' \
       -e 's/<a/<a class="bcc-a"/g' | sed \
       -e '3i<table width="100%"><tr><td width="80%">' \
       -e '12i<\/td><td>' \
