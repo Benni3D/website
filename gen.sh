@@ -26,6 +26,7 @@ if [ ! -f "${dest}/bcc.1.html" ]; then
       -e '12i<img width="100%" src="img/bcc.png"><br>' \
       -e '12i<a align="center" class="link2" href="https://github.com/Benni3D/bcc">GitHub<\/a>' \
       -e '12i<\/td><\/tr><\/table>' \
+      -e '$aGenerated using groff' \
       > "${src}/bcc.html"
 fi
 
