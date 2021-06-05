@@ -1,3 +1,6 @@
+
+/* General */
+
 body {
    background: #306030;
    width: 1280px;
@@ -25,10 +28,21 @@ h1 {
 }
 
 .text {
-   color: #8070ff;
+   color: #dddddd;
    font-family: monospace;
    font-size: 18px;
 }
+
+/* Unimportant Stuff */
+
+.unimp {
+   color: #aaaaaa;
+}
+.unimp-link {
+   color: #aaaa22;
+}
+
+/* Menu */
 
 .link-table {
    border: 0px solid darkgreen;
@@ -40,6 +54,7 @@ h1 {
    color: #408040;
    border: 1px solid darkgreen;
    background: darkgreen;
+   border-bottom-right-radius: 15px;
 }
 .link-button {
    background-color: darkgreen;
@@ -52,12 +67,10 @@ h1 {
    display: inline-block;
    font-size: 15px;
    cursor: pointer;
+   border-bottom-right-radius: 15px;
 }
-.link2 {
-   color: #478342;
-   font-family: serif;
-   font-size: 18px;
-}
+
+/* Liß */
 
 .hcat {
    width: 100%;
@@ -65,9 +78,14 @@ h1 {
 .cat {
    width: 33%;
 }
+
+/* Meme Site */
+
 .memevid {
    width: 49%;
 }
+
+/* Brainlet C Compiler Documentation */
 
 .bcc-p {
    color: #ffffff;
@@ -89,4 +107,9 @@ h1 {
 }
 .bcc-hr {
    color: #bbbb00;
+}
+.bcc-link {
+   color: #478342;
+   font-family: serif;
+   font-size: 18px;
 }
