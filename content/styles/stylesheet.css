@@ -58,7 +58,8 @@ h1 {
 }
 .link-button {
    background-color: darkgreen;
-   border: 1px solid green;
+   border-width: 1px;
+   border-color: green;
    color: yellow;
    width: 100%;
    height: 32px;
@@ -83,6 +84,11 @@ h1 {
 
 .memevid {
    width: 49%;
+}
+.link-EG {
+   color: #ff4444;
+   font-family: comic;
+   font-size: 20px;
 }
 
 /* Brainlet C Compiler Documentation */

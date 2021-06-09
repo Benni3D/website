@@ -24,7 +24,7 @@ if [ ! -f "${dest}/bcc.1.html" ]; then
       -e '3i<table width="100%"><tr><td width="80%">' \
       -e '12i<\/td><td>' \
       -e '12i<img width="100%" src="img/bcc.png"><br>' \
-      -e '12i<a align="center" class="bcc-link" href="https://github.com/Benni3D/bcc">GitHub<\/a>' \
+      -e '12i<a align="center" class="bcc-link" target="_blank" href="https://github.com/Benni3D/bcc">GitHub<\/a>' \
       -e '12i<\/td><\/tr><\/table>' \
       -e "\$a<p class=\"unimp\">Generated using groff on $(date -u +"%F %T (UTC)")</p>" \
       > "${src}/bcc.html"
