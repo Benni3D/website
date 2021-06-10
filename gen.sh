@@ -13,7 +13,7 @@ if [ ! -f "${dest}/bcc.1.html" ]; then
       -e '/<!DOCTYPE[^$]\+$/d' \
       -e '/"http:[^$]\+$/d' \
       -e '1,19d' \
-      -e 's/<h1 align="center">bcc/<h1 align="center">Brainlet C Compiler/' \
+      -e 's/<h1 align="center">bcc/<h1>Brainlet C Compiler/' \
       -e '/^<\/body>$/d' \
       -e '/^<\/html>$/d' \
       -e 's/<p/<p class="bcc-p"/g' \
