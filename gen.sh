@@ -8,7 +8,7 @@ mkdir -p "${dest}"
 
 # Generate bcc.html
 if [ ! -f "${dest}/bcc.1.html" ]; then
-   [ -f .bcc.1 ] || wget https://raw.githubusercontent.com/Benni3D/bcc/master/bcc.1 -O .bcc.1
+   [ -f .bcc.1 ] || wget https://raw.githubusercontent.com/Benni3D/bcc/master/src/bcc.1 -O .bcc.1
    groff -mandoc -Thtml ".bcc.1" | sed \
       -e '/<!DOCTYPE[^$]\+$/d' \
       -e '/"http:[^$]\+$/d' \
