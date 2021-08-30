@@ -1,4 +1,5 @@
 upload.sh
+scripts/upload.sh
 sites*
-.bcc.1
-content/bcc*
+.cache*
+

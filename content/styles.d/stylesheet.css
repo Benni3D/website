@@ -74,13 +74,17 @@ h1 {
 /* Liß */
 
 .hcat {
-   width: 100%;
+   width: 1055;
 }
-.cat {
-   width: 33%;
+.vcat {
+   height: 349;
 }
 .scat {
    width: 100%;
+}
+.rotcat {
+   width: 310;
+   transform: rotate(45deg)
 }
 
 /* Meme Site */
