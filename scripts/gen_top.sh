@@ -23,6 +23,6 @@ for e in $(grep -v '^#' content/templates/links.lst); do
    entry "$(echo "${e}" | cut -d',' -f1 | tr '_' ' ')" "$(echo "${e}" | cut -d',' -f2)" >> links.html
 done
 
-sed -e '/__LINKS__/rlinks.html' -e '/__LINKS__/d' content/templates/top.html.in
+sed -e '/__LINKS__/rlinks.html' -e '/__LINKS__/d'
 
 rm -f links.html
