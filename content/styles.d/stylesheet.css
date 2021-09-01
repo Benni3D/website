@@ -126,3 +126,11 @@ h1 {
    font-family: serif;
    font-size: 18px;
 }
+
+/* Microcoreutils Documentation */
+.mc-summary-link {
+   color: #378342;
+   font-family: serif;
+   font-size: 18px;
+}
+

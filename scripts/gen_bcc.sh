@@ -1,8 +1,6 @@
 #!/bin/sh
 
-[ -f .bcc.1 ] || wget https://raw.githubusercontent.com/Benni3D/bcc/master/src/bcc.1 -O .bcc.1
-
-groff -mandoc -Thtml ".bcc.1" | sed \
+groff -mandoc -Thtml ".cache/bcc.1" | sed \
    -e '/<!DOCTYPE[^$]\+$/d' \
    -e '/"http:[^$]\+$/d' \
    -e '1,19d' \

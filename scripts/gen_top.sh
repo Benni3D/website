@@ -19,7 +19,7 @@ entry() {
 }
 
 rm -f links.html
-for e in $(cat content/templates/links.lst); do
+for e in $(grep -v '^#' content/templates/links.lst); do
    entry "$(echo "${e}" | cut -d',' -f1 | tr '_' ' ')" "$(echo "${e}" | cut -d',' -f2)" >> links.html
 done
 
