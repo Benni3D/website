@@ -84,19 +84,6 @@ cat-images	= $(patsubst %,content/img.d/%,$(cats))
 cat-htmls 	= $(patsubst content/img.d/%.jpg,sites/%.html,$(cat-images))
 
 all-cats: $(cat-htmls) sites/cat.html
-#sites/Cat_%.html: content/img.d/Cat_%.jpg sites/img $(templatesdir)/single-cat.html $(templatesdir)/top.html
-#	@echo Generating \'$@\'
-#	@mkdir -p sites
-#	@sed -e 's,__CAT__,$(patsubst content/img.d/%,img/%,$<),'	\
-#		 -e "s,__STYLE__,cat,"		\
-#		 $(templatesdir)/single-cat.html >			\
-#		 $@.in
-#	@sed -e '/__REPLACE__/r$@.in' \
-#		 -e '/__REPLACE__/d'			\
-#		 $(templatesdir)/top.html	> $@
-#	@rm $@.in
-#	@$(UPLOAD) $@
-
 
 ## Single Cats
 
@@ -141,6 +128,7 @@ sites/cat.html: .cache/cat.html.in $(templatesdir)/top.html
 
 all-docs: sites/bcc.1.html all-microcoreutils
 
+
 ### Brainlet C Compiler
 bcc-man-pages=https://raw.githubusercontent.com/Benni3D/bcc/master/src
 
@@ -152,7 +140,7 @@ sites/bcc.1.html: .cache/bcc.1.html.in $(templatesdir)/top.html
 	@$(UPLOAD) $@
 
 # Generate bcc.1.html.in from bcc.1
-.cache/bcc.1.html.in: .cache/bcc.1
+.cache/bcc.1.html.in: .cache/bcc.1 scripts/gen_bcc.sh
 	@sh scripts/gen_bcc.sh >$@
 
 # Download bcc.1
@@ -160,6 +148,7 @@ sites/bcc.1.html: .cache/bcc.1.html.in $(templatesdir)/top.html
 	@echo Downloading \'$@\'
 	@mkdir -p .cache
 	@curl $(bcc-man-pages)/bcc.1 >$@ 2>/dev/null
+
 
 ### Microcoreutils
 mc-man-pageurl=https://raw.githubusercontent.com/Benni3D/microcoreutils/master/doc
@@ -177,11 +166,17 @@ sites/mc-summary.html: .cache/mc-summary.html.in
 	@sed -e '/__REPLACE__/r$<' -e '/__REPLACE__/d' $(templatesdir)/top.html >$@
 	@$(UPLOAD) $@
 
-# Generate mc-summary.html.in from microcoreutils.lst
-.cache/mc-summary.html.in: $(templatesdir)/microcoreutils.lst scripts/gen_mclist.sh
+# Generate mc-summary.html.in from mc-summary.html.lst
+.cache/mc-summary.html.in: .cache/mc-summary.html.lst $(templatesdir)/mc-summary.html
+	@sed -e '/__LINKS__/r$<' -e '/__LINKS__/d' $(templatesdir)/mc-summary.html >$@
+
+
+# Generate mc-summary.html.lst from microcoreutils.lst
+.cache/mc-summary.html.lst: $(templatesdir)/microcoreutils.lst scripts/gen_mclist.sh
 	@mkdir -p .cache
 	@sh scripts/gen_mclist.sh $< >$@
 	
+
 ## Individual pages
 
 # Generate %.html from %.html.in
