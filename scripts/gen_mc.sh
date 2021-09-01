@@ -8,6 +8,7 @@ file="$1"
 name="$(awk 'NR==1{print $2}' "${file}")"
 description="$(grep -A1 '^\.SH NAME' "${file}" | awk 'NR==2{print}')"
 section="$(awk 'NR==1{print $3}' "${file}")"
+sourcelink="https://github.com/Benni3D/microcoreutils/blob/master/src/${name}.c"
 
 #echo "${name} (${section}) : ${description}" >&2
 
@@ -24,7 +25,6 @@ groff -mandoc -Thtml "${file}" | sed \
    -e 's/<hr>/<hr class="bcc-hr">/g' \
    -e 's/<a/<a class="bcc-a"/g' | sed \
    -e '3i<table width="100%"><tr><td width="80%">' \
-   -e '12i<\/td><td>' \
-   -e '12i<a align="center" class="bcc-link" target="_blank" href="https://github.com/Benni3D/microcoreutils">GitHub<\/a>' \
+   -e "/#COPYRIGHT/a<a align='center' class='bcc-link' target='_blank' href='${sourcelink}'>Source Code<\/a>" \
    -e '12i<\/td><\/tr><\/table>' \
    -e "\$a<p class=\"unimp\">Generated using groff on $(date -u +"%F %T (UTC)")</p>"
