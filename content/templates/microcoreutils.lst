@@ -20,6 +20,7 @@ init.8
 kill.1
 link.1
 ln.1
+logname.1
 mkdir.1
 mv.1
 pwd.1
