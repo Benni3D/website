@@ -89,6 +89,7 @@ sites/Cat_%.html: .cache/Cat_%.html.in $(TOP)
 	@sed 	-e '/__REPLACE__/r$<'	\
 			-e '/__REPLACE__/d'		\
 			$(TOP) >$@
+	@$(UPLOAD) $@
 
 # Generate Cat_N.html.in
 .cache/Cat_%.html.in: content/img.d/Cat_%.jpg $(templatesdir)/single-cat.html
