@@ -22,10 +22,14 @@ clean:
 all-templates: $(TOP)
 
 # Generate top.html from top.html.in & links.lst
-$(TOP): $(templatesdir)/top.html $(templatesdir)/links.lst scripts/gen_top.sh
+$(TOP): .cache/top.html.in $(templatesdir)/top.html 
 	@echo Generating \'$@\'
 	@mkdir -p .cache
-	@sh scripts/gen_top.sh <$< >$(TOP)
+	@sed -e '/__LINKS__/r$<' -e '/__LINKS__/d' <$(templatesdir)/top.html >$@
+
+.cache/top.html.in: $(templatesdir)/links.lst scripts/gen_links.sh
+	@mkdir -p .cache
+	@sh scripts/gen_links.sh <$< >$@
 
 ###############################################################################
 #										Directories													#
@@ -36,14 +40,6 @@ sites-dirs		= $(patsubst %,sites/%,$(content-dirs))
 images			= $(wildcard content/img.d/*)
 
 all-dirs: $(sites-dirs)
-
-# Copy the img directory
-#sites/img: content/img.d $(images)
-#	@echo Copying '$<' -> '$@'
-#	@mkdir -p sites
-#	@rm -rf $@
-#	@cp -r $< $@
-#	@$(UPLOAD) $@
 
 # Copy all other directories
 sites/%: content/%.d
