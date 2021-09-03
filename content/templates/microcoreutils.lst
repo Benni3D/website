@@ -3,6 +3,7 @@ basename.1
 cal.1
 cat.1
 chgrp.1
+chmod.1
 chown.1
 cksum.1
 clear.1
@@ -12,6 +13,7 @@ dirname.1
 du.1
 echo.1
 env.1
+expr.1
 false.1
 halt.8
 head.1
@@ -29,6 +31,7 @@ rmdir.1
 sleep.1
 sync.1
 tee.1
+test.1
 tr.1
 true.1
 tty.1

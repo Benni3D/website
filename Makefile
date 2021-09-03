@@ -124,11 +124,13 @@ sites/cat.html: .cache/cat.html.in $(TOP)
 #								Documentation and Man pages									#
 ###############################################################################
 
-all-docs: sites/bcc.1.html all-microcoreutils
+all-docs: all-bcc all-microcoreutils
 
 
 ### Brainlet C Compiler
 bcc-man-pages=https://raw.githubusercontent.com/Benni3D/bcc/master/src
+
+all-bcc: sites/bcc.1.html
 
 # Generate bcc.1.html from bcc.1.html.in
 sites/bcc.1.html: .cache/bcc.1.html.in $(TOP)
@@ -146,6 +148,9 @@ sites/bcc.1.html: .cache/bcc.1.html.in $(TOP)
 	@echo Downloading \'$@\'
 	@mkdir -p .cache
 	@curl $(bcc-man-pages)/bcc.1 >$@ 2>/dev/null
+
+clean-bcc:
+	rm -f sites/bcc.1.html .cache/bcc.1.html.in .cache/bcc.1
 
 
 ### Microcoreutils
@@ -199,4 +204,5 @@ sites/mc-%.html: .cache/mc-%.html.in $(TOP)
 
 .PHONY:	all reupload full-clean clean			\
 			all-templates all-dirs all-static	\
-			all-cats all-docs
+			all-cats all-docs clean-bcc			\
+			all-microcoreutils all-bcc

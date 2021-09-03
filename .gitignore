@@ -2,4 +2,6 @@ upload.sh
 scripts/upload.sh
 sites*
 .cache*
-
+content/vids.d
+content/EG1.html
+content/EG2.html
