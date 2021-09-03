@@ -134,3 +134,10 @@ h1 {
    font-size: 22px;
 }
 
+
+.storytext {
+   text-align: justify;
+   color: #dddddd;
+   font-family: monospace;
+   font-size: 18px;
+}

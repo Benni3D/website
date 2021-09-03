@@ -7,7 +7,7 @@ else
 UPLOAD=\#
 endif
 
-all: all-templates all-dirs all-static all-docs all-cats
+all: all-templates all-dirs all-static all-docs all-cats all-stories
 
 reupload:
 	sh scripts/upload.sh sites
@@ -57,14 +57,10 @@ sites/%: content/%.d
 #										Static webpages											#
 ###############################################################################
 
-content-static	= EG1.html			\
-					  EG2.html			\
-					  impressum.html	\
-					  index.html		\
-					  memes.html
-sites-static	= $(patsubst %.html,sites/%.html,$(content-static))
+content-static = $(shell cat $(templatesdir)/static.lst)
+sites-static	= $(patsubst %,sites/%.html,$(content-static))
 
-all-static: $(sites-static)
+all-static: $(sites-static) $(templatesdir)/static.lst
 
 # Generate a static website from the top.html template
 sites/%.html: content/%.html $(TOP)
@@ -201,8 +197,27 @@ sites/mc-%.html: .cache/mc-%.html.in $(TOP)
 	@curl $(mc-man-pageurl)/$(patsubst .cache/mc-man-%,%,$@) \
 		>$@ 2>/dev/null
 
+###############################################################################
+#			Stories that no one should read (seriously please don't)					#
+###############################################################################
 
-.PHONY:	all reupload full-clean clean			\
-			all-templates all-dirs all-static	\
-			all-cats all-docs clean-bcc			\
-			all-microcoreutils all-bcc
+## Generate stories
+stories-html 	= $(patsubst %,sites/story-%.html,$(shell cat $(templatesdir)/stories.lst))
+
+all-stories: $(stories-html) $(templatesdir)/stories.lst
+
+# Generate story-%.html from story-%.html.in
+sites/story-%.html: .cache/story-%.html.in $(TOP)
+	@echo Generating \'$@\'
+	@mkdir -p sites
+	@sed -e '/__REPLACE__/r$<' -e '/__REPLACE__/d' $(TOP) >$@
+	@$(UPLOAD) $@
+
+# Generate story-%.html.in from %.txt
+.cache/story-%.html.in: content/stories/%.txt scripts/gen_story.sh
+	@sh scripts/gen_story.sh <$< >$@
+
+.PHONY:	all reupload full-clean clean				\
+			all-templates all-dirs all-static		\
+			all-cats all-docs clean-bcc				\
+			all-microcoreutils all-bcc all-stories
