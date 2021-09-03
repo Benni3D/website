@@ -8,7 +8,12 @@ file="$1"
 name="$(awk 'NR==1{print $2}' "${file}")"
 description="$(grep -A1 '^\.SH NAME' "${file}" | awk 'NR==2{print}')"
 section="$(awk 'NR==1{print $3}' "${file}")"
-sourcelink="https://github.com/Benni3D/microcoreutils/blob/master/src/${name}.c"
+if [ "${name}" = "false" ]; then
+   sourcename="true"
+else
+   sourcename="${name}"
+fi
+sourcelink="https://github.com/Benni3D/microcoreutils/blob/master/src/${sourcename}.c"
 
 #echo "${name} (${section}) : ${description}" >&2
 
