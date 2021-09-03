@@ -13,7 +13,7 @@ for f in $@; do
    ([ -z "${width}" ] || [ -z "${height}" ]) && continue
 
    # Get the displayed width
-   real_width=$(grep "^$(basename "$f")|" content/templates/cats.lst | cut -d'|' -f2)
+   real_width=$(grep -v '^\s*#' content/templates/cats.lst | grep "^$(basename "$f")|" | cut -d'|' -f2)
    if [ -z "${real_width}" ]; then
       if [ "${width}" -gt "${height}" ]; then
          class="hcat"

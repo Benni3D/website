@@ -57,7 +57,7 @@ sites/%: content/%.d
 #										Static webpages											#
 ###############################################################################
 
-content-static = $(shell cat $(templatesdir)/static.lst)
+content-static = $(shell grep -v '^\s*#' $(templatesdir)/static.lst)
 sites-static	= $(patsubst %,sites/%.html,$(content-static))
 
 all-static: $(sites-static) $(templatesdir)/static.lst
@@ -73,7 +73,7 @@ sites/%.html: content/%.html $(TOP)
 #										Cat images													#
 ###############################################################################
 
-cats			= $(shell sed 's/^\([^|]*\)|.*$$/\1/' content/templates/cats.lst)
+cats			= $(shell grep -v '^\s*#' content/templates/cats.lst | sed 's/^\([^|]*\)|.*$$/\1/')
 cat-images	= $(patsubst %,content/img.d/%,$(cats))
 cat-htmls 	= $(patsubst content/img.d/%.jpg,sites/%.html,$(cat-images))
 
@@ -203,7 +203,7 @@ sites/mc-%.html: .cache/mc-%.html.in $(TOP)
 ###############################################################################
 
 ## Generate stories
-stories-html 	= $(patsubst %,sites/story-%.html,$(shell cat $(templatesdir)/stories.lst))
+stories-html 	= $(patsubst %,sites/story-%.html,$(shell grep -v '^\s*#' $(templatesdir)/stories.lst))
 
 all-stories: $(stories-html) $(templatesdir)/stories.lst
 
