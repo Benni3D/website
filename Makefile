@@ -21,12 +21,13 @@ clean:
 
 all-templates: $(TOP)
 
-# Generate top.html from top.html.in & links.lst
+# Generate $(TOP) from top.html.in, top.html
 $(TOP): .cache/top.html.in $(templatesdir)/top.html 
 	@echo Generating \'$@\'
 	@mkdir -p .cache
 	@sed -e '/__LINKS__/r$<' -e '/__LINKS__/d' <$(templatesdir)/top.html >$@
 
+# Generate top.html.in from links.lst
 .cache/top.html.in: $(templatesdir)/links.lst scripts/gen_links.sh
 	@mkdir -p .cache
 	@sh scripts/gen_links.sh <$< >$@
@@ -35,7 +36,7 @@ $(TOP): .cache/top.html.in $(templatesdir)/top.html
 #										Directories													#
 ###############################################################################
 
-content-dirs	= img styles vids
+content-dirs	= img styles vids files
 sites-dirs		= $(patsubst %,sites/%,$(content-dirs))
 images			= $(wildcard content/img.d/*)
 
@@ -213,6 +214,8 @@ sites/story-%.html: .cache/story-%.html.in $(TOP)
 # Generate story-%.html.in from %.txt
 .cache/story-%.html.in: content/stories/%.txt scripts/gen_story.sh
 	@sh scripts/gen_story.sh <$< >$@
+
+###############################################################################
 
 .PHONY:	all reupload full-clean clean				\
 			all-templates all-dirs all-static		\
