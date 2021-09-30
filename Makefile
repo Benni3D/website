@@ -166,25 +166,29 @@ generic-progs=$(patsubst %,sites/generic-%.html,$(generic-pages))
 
 all-generic-progs: $(generic-progs)
 
+clean-generic-progs:
+	rm -f $(generic-progs)
+	rm -f .cache/generic*
+
 sites/generic-%.html: .cache/generic-%.html.in $(TOP)
 	@echo Generating \'$@\'
 	@mkdir -p sites
 	@sed -e '/__REPLACE__/r$<' -e '/__REPLACE__/d' $(TOP) >$@
 	@$(UPLOAD) $@
 
-.cache/generic-%.html.in: .cache/generic-% scripts/gen_generic_prog.sh
+.cache/generic-%.html.in: .cache/generic-page-% scripts/gen_generic_prog.sh
 	@mkdir -p .cache
-	@name='$(patsubst .cache/generic-%,%,$<)'; 									\
+	@name='$(patsubst .cache/generic-page-%,%,$<)'; 							\
 	line="$$(echo '$(generic-progs-list)' | grep -F "$${name}")";			\
 	title="$$(echo "$${line}" | awk -F',' '{print $$2}')";					\
 	link="$$(echo "$${line}" | awk -F',' '{print $$3}')";						\
 	realname="$$(echo "$${name}" | cut -d'.' -f1)";								\
 	sh scripts/gen_generic_prog.sh "$${realname}" "$${title}" "$${link}" <$< >$@
 
-.cache/generic-%:
+.cache/generic-page-%:
 	@echo Downloading \'$@\'
 	@mkdir -p .cache
-	@curl $(shell echo '$(generic-progs-list)' | grep -F '$(patsubst .cache/generic-%,%,$@)' | awk -F',' '{print $$4}') >$@ 2>/dev/null
+	@curl $(shell echo '$(generic-progs-list)' | grep -F '$(patsubst .cache/generic-page-%,%,$@)' | awk -F',' '{print $$4}') >$@ 2>/dev/null
 
 ### Microcoreutils
 mc-man-pageurl=https://raw.githubusercontent.com/Benni3D/microcoreutils/master/doc
@@ -260,6 +264,6 @@ sites/story-%.html: .cache/story-%.html.in $(TOP)
 			all-templates all-dirs all-static		\
 			all-cats all-docs clean-bcc				\
 			all-microcoreutils all-bcc all-stories	\
-			all-generic-progs
+			all-generic-progs clean-generic-progs
 
 

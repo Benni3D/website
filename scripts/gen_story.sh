@@ -14,7 +14,11 @@ read title     || die "missing title"
 read author    || die "missing author"
 read text      || die "missing text"
 while read -r line; do
-   text="${text} ${line}"
+   if echo "${line}" | grep -q '^\s*$'; then
+      text="${text}\n</p><p class='storytext'>\n"
+   else
+      text="${text} ${line}"
+   fi
 done
 
 echo "<h1>${title}</h1>"
