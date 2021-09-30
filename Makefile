@@ -7,7 +7,7 @@ else
 UPLOAD=\#
 endif
 
-all: all-templates all-dirs all-static all-docs all-cats all-stories
+all: all-templates all-dirs all-static all-docs all-cats all-stories all-generic-progs
 
 reupload:
 	sh scripts/upload.sh sites
@@ -36,17 +36,30 @@ $(TOP): .cache/top.html.in $(templatesdir)/top.html
 #										Directories													#
 ###############################################################################
 
-content-dirs	= img styles vids files
+content-dirs	= img styles vids
 sites-dirs		= $(patsubst %,sites/%,$(content-dirs))
+content-files	= $(wildcard content/files/*)
+sites-files		= $(patsubst content/files/%,sites/files/%,$(content-files))
 images			= $(wildcard content/img.d/*)
 
-all-dirs: $(sites-dirs)
+all-dirs: $(sites-dirs) all-files
 
 # Copy all other directories
 sites/%: content/%.d
 	@echo Copying \'$<\' '->' \'$@\'
 	@mkdir -p sites
 	@rm -rf $@
+	@cp -r $< $@
+	@$(UPLOAD) $@ || (rm $@ && exit 1)
+
+# Files directory
+
+all-files: $(sites-files)
+
+# Copy files
+sites/files/%: content/files/%
+	@echo Copying \'$<\' '->' \'$@\'
+	@mkdir -p sites/files
 	@cp -r $< $@
 	@$(UPLOAD) $@
 
@@ -146,6 +159,32 @@ sites/bcc.1.html: .cache/bcc.1.html.in $(TOP)
 clean-bcc:
 	rm -f sites/bcc.1.html .cache/bcc.1.html.in .cache/bcc.1
 
+### Haskalc
+generic-progs-list=$(shell grep -v '^\s*#' $(templatesdir)/generic-progs.lst)
+generic-pages=$(shell echo "$(generic-progs-list)" | awk -F',' '{print $$1}')
+generic-progs=$(patsubst %,sites/generic-%.html,$(generic-pages))
+
+all-generic-progs: $(generic-progs)
+
+sites/generic-%.html: .cache/generic-%.html.in $(TOP)
+	@echo Generating \'$@\'
+	@mkdir -p sites
+	@sed -e '/__REPLACE__/r$<' -e '/__REPLACE__/d' $(TOP) >$@
+	@$(UPLOAD) $@
+
+.cache/generic-%.html.in: .cache/generic-% scripts/gen_generic_prog.sh
+	@mkdir -p .cache
+	@name='$(patsubst .cache/generic-%,%,$<)'; 									\
+	line="$$(echo '$(generic-progs-list)' | grep -F "$${name}")";			\
+	title="$$(echo "$${line}" | awk -F',' '{print $$2}')";					\
+	link="$$(echo "$${line}" | awk -F',' '{print $$3}')";						\
+	realname="$$(echo "$${name}" | cut -d'.' -f1)";								\
+	sh scripts/gen_generic_prog.sh "$${realname}" "$${title}" "$${link}" <$< >$@
+
+.cache/generic-%:
+	@echo Downloading \'$@\'
+	@mkdir -p .cache
+	@curl $(shell echo '$(generic-progs-list)' | grep -F '$(patsubst .cache/generic-%,%,$@)' | awk -F',' '{print $$4}') >$@ 2>/dev/null
 
 ### Microcoreutils
 mc-man-pageurl=https://raw.githubusercontent.com/Benni3D/microcoreutils/master/doc
@@ -220,4 +259,7 @@ sites/story-%.html: .cache/story-%.html.in $(TOP)
 .PHONY:	all reupload full-clean clean				\
 			all-templates all-dirs all-static		\
 			all-cats all-docs clean-bcc				\
-			all-microcoreutils all-bcc all-stories
+			all-microcoreutils all-bcc all-stories	\
+			all-generic-progs
+
+
