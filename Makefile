@@ -160,11 +160,10 @@ clean-bcc:
 	rm -f sites/bcc.1.html .cache/bcc.1.html.in .cache/bcc.1
 
 ### Haskalc
-generic-progs-list=$(shell grep -v '^\s*#' $(templatesdir)/generic-progs.lst)
-generic-pages=$(shell echo "$(generic-progs-list)" | awk -F',' '{print $$1}')
+generic-pages=$(shell grep -v '^\s*#' "$(templatesdir)/generic-progs.lst" | awk -F',' '{print $$1}')
 generic-progs=$(patsubst %,sites/generic-%.html,$(generic-pages))
 
-all-generic-progs: $(generic-progs)
+all-generic-progs: $(templatesdir)/generic-progs.lst $(generic-progs)
 
 clean-generic-progs:
 	rm -f $(generic-progs)
@@ -179,7 +178,7 @@ sites/generic-%.html: .cache/generic-%.html.in $(TOP)
 .cache/generic-%.html.in: .cache/generic-page-% scripts/gen_generic_prog.sh
 	@mkdir -p .cache
 	@name='$(patsubst .cache/generic-page-%,%,$<)'; 							\
-	line="$$(echo '$(generic-progs-list)' | grep -F "$${name}")";			\
+	line="$$(grep -v '^\s*#' '$(templatesdir)/generic-progs.lst' | grep -F "$${name}")";			\
 	title="$$(echo "$${line}" | awk -F',' '{print $$2}')";					\
 	link="$$(echo "$${line}" | awk -F',' '{print $$3}')";						\
 	realname="$$(echo "$${name}" | cut -d'.' -f1)";								\
@@ -188,7 +187,7 @@ sites/generic-%.html: .cache/generic-%.html.in $(TOP)
 .cache/generic-page-%:
 	@echo Downloading \'$@\'
 	@mkdir -p .cache
-	@curl $(shell echo '$(generic-progs-list)' | grep -F '$(patsubst .cache/generic-page-%,%,$@)' | awk -F',' '{print $$4}') >$@ 2>/dev/null
+	@curl $(shell grep -v '^\s*#' "$(templatesdir)/generic-progs.lst" | grep -F '$(patsubst .cache/generic-page-%,%,$@)' | awk -F',' '{print $$4}') >$@ 2>/dev/null
 
 ### Microcoreutils
 mc-man-pageurl=https://raw.githubusercontent.com/Benni3D/microcoreutils/master/doc
