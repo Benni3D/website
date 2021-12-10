@@ -52,6 +52,12 @@ sites/%: content/%.d
 	@cp -r $< $@
 	@$(UPLOAD) $@ || (rm $@ && exit 1)
 
+reupload-cats:
+	@echo Reuploading img.d
+	@rm -rf sites/img
+	@cp -r content/img.d sites/img
+	@$(UPLOAD) sites/img
+
 # Files directory
 
 all-files: $(sites-files)
@@ -135,7 +141,7 @@ all-docs: all-bcc all-microcoreutils
 
 
 ### Brainlet C Compiler
-bcc-man-pages=https://raw.githubusercontent.com/Benni3D/bcc/master/src
+bcc-man-pages=https://raw.githubusercontent.com/riscygeek/bcc/master/src
 
 all-bcc: sites/bcc.1.html
 
@@ -190,7 +196,7 @@ sites/generic-%.html: .cache/generic-%.html.in $(TOP)
 	@curl $(shell grep -v '^\s*#' "$(templatesdir)/generic-progs.lst" | grep -F '$(patsubst .cache/generic-page-%,%,$@)' | awk -F',' '{print $$4}') >$@ 2>/dev/null
 
 ### Microcoreutils
-mc-man-pageurl=https://raw.githubusercontent.com/Benni3D/microcoreutils/master/doc
+mc-man-pageurl=https://raw.githubusercontent.com/riscygeek/microcoreutils/master/doc
 mc-man-pages=$(shell grep -v '^\s*#' $(templatesdir)/microcoreutils.lst)
 mc-gen-pages=$(patsubst %,sites/mc-%.html,$(mc-man-pages))
 

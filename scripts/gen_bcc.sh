@@ -1,6 +1,6 @@
 #!/bin/sh
 
-link="https://github.com/Benni3D/bcc"
+link="https://github.com/riscygeek/bcc"
 
 groff -mandoc -Thtml ".cache/bcc.1" | sed \
    -e '/<!DOCTYPE[^$]\+$/d' \

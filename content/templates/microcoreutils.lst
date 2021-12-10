@@ -16,6 +16,7 @@ echo.1
 env.1
 expr.1
 false.1
+grep.1
 halt.8
 head.1
 id.1
@@ -25,6 +26,7 @@ link.1
 ln.1
 logname.1
 mkdir.1
+mkfifo.1
 mv.1
 nice.1
 pathchk.1

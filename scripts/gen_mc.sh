@@ -13,7 +13,7 @@ if [ "${name}" = "false" ]; then
 else
    sourcename="${name}"
 fi
-sourcelink="https://github.com/Benni3D/microcoreutils/blob/master/src/${sourcename}.c"
+sourcelink="https://github.com/riscygeek/microcoreutils/blob/master/src/${sourcename}.c"
 
 #echo "${name} (${section}) : ${description}" >&2
 
